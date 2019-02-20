@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+            <h1>Resultados</h1>
+            <div id="resulAPP"></div>
+            
+    </center>
+    <script>
+        var data=[ {"Nombre":"David",
+                    "Monto":"10",
+                    "Categoria":"comida",
+                    "Descripcion":"comida del dia viernes",
+                   },
+                   {"Nombre":"David",
+                    "Monto":"10",
+                    "Categoria":"comida",
+                    "Descripcion":"comida del dia viernes",
+                   },
+                   {"Nombre":"David",
+                    "Monto":"10",
+                    "Categoria":"comida",
+                    "Descripcion":"comida del dia viernes",
+                   },
+                   {"Nombre":"David",
+                    "Monto":"10",
+                    "Categoria":"comida",
+                    "Descripcion":"comida del dia viernes",
+                   },
+                 
+                 ];
+        
+            var text="";
+            data.forEach(element => {
+                text+="<table>";
+                text=text+"<tr>"+"<td>"+"Nombre"+"</td>"+"<td>"+element.Nombre+"</td>"+"</tr>";
+                text=text+"<tr>"+"<td>"+"Monto"+"</td>"+"<td>"+element.Monto+"</td>"+"</tr>";
+                text=text+"<tr>"+"<td>"+"Categoria"+"</td>"+"<td>"+element.Categoria+"</td>"+"</tr>";
+                text=text+"<tr>"+"<td>"+"Descripcion"+"</td>"+"<td>"+element.Descripcion+"</td>"+"</tr>";
+                text=text+"<tr>"+"<td>"+"<button "+"onclick="+"funcioneliminar()"+"name="+"boton"+" "+"type="+"submit"+"><img src="+"eliminar.png"+" "+"width="+"20"+" "+"height="+"20"+"> </button>"+"</td>"+"<td>"+"<button type="+"submit"+"><img src="+"editar.png"+" width="+"20"+" height="+"20"+" /></button>"+"</td>"+"</tr>";
+                //text=text+"<tr>"+"<td>"+"</td>"+"<td>"+"<input type="+"button"+ "onclick="+" value="+"Eliminar"+">"+"</td>"+"</tr>"                text+="</table>";
+            });
+            document.getElementById("resulAPP").innerHTML = text;
+            
+            function funcioneliminar(){
+
+            };
+    </script>
+    <button type="submit"><img src="editar.png" width="20" height="20" /></button>
+</body>
+</html>
