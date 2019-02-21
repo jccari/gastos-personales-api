@@ -8,11 +8,19 @@ const dbPort = 3000
 
 app.use(BodyParser.urlencoded({ extended: true }))
 
-const client = new MongoClient(db.dbUrl, { useNewUrlParser: true });
+var datatest = {
+    nombre: "nombretest",
+    monto: 1200,
+    categoria: "categoriatest",
+    descripcion: "descripciontest"
+}
+
+const client = new MongoClient(db.dbUrl(), { useNewUrlParser: true });
 client.connect(err => {
     if (err) return console.log(err)
     const collection = client.db("gastos-personales").collection("gastos-personales");
     // perform actions on the collection object
+
     app.listen(dbPort, ()=>{
         console.log("[MongoDb] Listen on "+ dbPort +" port")
     })
