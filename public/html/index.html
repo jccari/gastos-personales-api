@@ -7,8 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="public/css/normalize.css">
-    <link rel="stylesheet" href="public/css/skeleton.css">  
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">  
   <style>
 
     .h1{
@@ -40,25 +40,26 @@
   </head>
       <center>
           <h1>Gastos diarios </h1>
-  <form action="">
-  <label for="" class="">Nombre</label>
-  <input type="text" placeholder="Tu nombre aquí">
-  <br>
-  <label for="" class="">Monto</label>
-  <input type="text">
-  <br>
-  <label for="" class="">Categoría</label>
-  <select name="" id="Categoría">
-      <option value="Comida">Comida</option>
-      <option value="Ropa">Ropa</option>
-      <option value="Netflix">Netflix</option>
-  </select>
-  <br>
-  <label for="" class="">Descripción</label>
-  <input type="text">
- <br>
-  <button type="button" class="boton">Submit</button>
-  </form>
+          <form action="/nuevo-gasto" method="POST">
+            <label for="nombre" class="">Nombre</label>
+            <input type="text" id="nombre" placeholder="Tu nombre aquí">
+            <br>
+            <label for="monto" class="">Monto</label>
+            <input type="text" id ="monto">
+            <br>
+            <label for="categoria" class="">Categoría</label>
+            <select name="" id="categoria">
+                <option value="Comida">Comida</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Netflix">Netflix</option>
+                <option value="Entretenimiento">Entretenimiento</option>
+            </select>
+            <br>
+              <label for="descripcion" class="">Descripción</label>
+              <input type="text" id="descripcion">
+            <br>
+            <button type="submit" class="boton">Submit</button>
+          </form>
           </center>
 </body>
 </html>

@@ -4,25 +4,18 @@ const BodyParser      = require('body-parser');
 
 const app   = Express();
 const db    = require('./config/db');
-const dbPort = 3000
+const dbPort = 8081
 
 app.use(BodyParser.urlencoded({ extended: true }))
 
-var datatest = {
-    nombre: "nombretest",
-    monto: 1200,
-    categoria: "categoriatest",
-    descripcion: "descripciontest"
-}
-
 const client = new MongoClient(db.dbUrl(), { useNewUrlParser: true });
+
 client.connect(err => {
     if (err) return console.log(err)
-    const collection = client.db("gastos-personales").collection("gastos-personales");
+    const database = client.db("gastos-personales");
     // perform actions on the collection object
-
+    require('./app/routes')(app, database);
     app.listen(dbPort, ()=>{
-        console.log("[MongoDb] Listen on "+ dbPort +" port")
+        console.log("[MongoDB] Listen on "+ dbPort +" port")
     })
-    client.close();
 });
