@@ -29,18 +29,18 @@ module.exports = function (app, db, urlencodedParser) {
         res.send('Hola ' + req.body.nombre+ ", sus datos fueron insertados");
     });
     
-    app.delete('/gasto/borrar', (req, res) => {
-        var query = {'_id': new ObjectID(req.body.id) };
-
-        dbo.collection("customers").deleteOne(query, function(err, obj) {
+    app.delete('/gasto/borrar/:id', (req, res) => {
+        var query = {'_id': new ObjectID(req.params.id) };
+        console.log(query);
+        db.collection("gastos").deleteOne(query, function(err, obj) {
             if (err) throw err;
-            console.log("[MongoDB] id: "+ req.body.id + " deleted");
+            console.log("[MongoDB] id: "+ req.params.id + " deleted");
           });
     });
 
     app.get('/gasto/:id', (req, res) => {
         var query = {'_id': new ObjectID(req.params.id) };
-        db.collection('gastos').findOne(details, (err, item) => {
+        db.collection('gastos').findOne(query, (err, item) => {
 			if (err) {
 				res.send({ 'error': 'An error has occured' });
 			} else {
@@ -57,7 +57,7 @@ module.exports = function (app, db, urlencodedParser) {
                                     categoria: req.body.categoria,
                                     descripcion: req.body.descripcion
                                  }};
-        dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) {
+        dbo.collection("gastos").updateOne(query, newvalues, function(err, res) {
           if (err) throw err;
           console.log("[MongoDB] id: "+ req.body.id+ " has been updated");
           db.close();
