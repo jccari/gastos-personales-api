@@ -1,14 +1,16 @@
-const Express         = require('express');
-const MongoClient     = require('mongodb').MongoClient;
-const BodyParser      = require('body-parser');
+const express         = require('express');
+const mongoClient     = require('mongodb').MongoClient;
+const bodyParser      = require('body-parser');
 
-const app   = Express();
+const app   = express();
 const db    = require('./config/db');
 const dbPort = 8081
 
-app.use(BodyParser.urlencoded({ extended: true }))
+app.use(express.static('public',{}));
+// app.use( bodyParser.json() ); 
+app.use(bodyParser.urlencoded({ extended: false }))
 
-const client = new MongoClient(db.dbUrl(), { useNewUrlParser: true });
+const client = new mongoClient(db.dbUrl(), { useNewUrlParser: true });
 
 client.connect(err => {
     if (err) return console.log(err)

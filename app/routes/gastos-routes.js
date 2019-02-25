@@ -1,18 +1,10 @@
-const express   = require('express');
 const path      = require('path');
-const bodyParser = require('body-parser');
+var ObjectID    = require('mongodb').ObjectID
 
-const app = express();
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
-
-module.exports = function (app, db) {
+module.exports = function (app, db, urlencodedParser) {
     app.get('/', (req, res) => {
         console.log("GET /");
-        console.log(path.join(__dirname, '../../public/html'));
+        //console.log(path.join(__dirname, '../../public/html'));
         //console.log(path.dirname())
         var options = {
             root: path.join(__dirname, '../../public/html'),
@@ -26,13 +18,49 @@ module.exports = function (app, db) {
         res.sendFile('index.html', options);
     });
     
-    app.post("/nuevo-gasto",(req, res) => {
+    app.post('/gasto/nuevo', (req, res) => {
         console.log("POST nuevo-gasto");
-        const bodyy = req.body;
-        console.log(bodyy);
+        console.log(req.body);
+        db.collection("gastos").insertOne(req.body, function(err, res) {
+            if (err) throw err;
+            console.log("[MongoDB] Document inserted");
+          });
+
+        res.send('Hola ' + req.body.nombre+ ", sus datos fueron insertados");
     });
     
-    app.delete('/borrar-gasto', (req, res) => {
-        
+    app.delete('/gasto/borrar', (req, res) => {
+        var query = {'_id': new ObjectID(req.body.id) };
+
+        dbo.collection("customers").deleteOne(query, function(err, obj) {
+            if (err) throw err;
+            console.log("[MongoDB] id: "+ req.body.id + " deleted");
+          });
+    });
+
+    app.get('/gasto/:id', (req, res) => {
+        var query = {'_id': new ObjectID(req.params.id) };
+        db.collection('gastos').findOne(details, (err, item) => {
+			if (err) {
+				res.send({ 'error': 'An error has occured' });
+			} else {
+				res.send(item);
+			}
+		});
+    });
+
+    app.put('/gasto/update', (req, res) => {
+        var query = {'_id': new ObjectID(req.body.id) };
+        var newvalues = { $set: {
+                                    nombre: req.body.nombre, 
+                                    monto: req.body.monto,
+                                    categoria: req.body.categoria,
+                                    descripcion: req.body.descripcion
+                                 }};
+        dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("[MongoDB] id: "+ req.body.id+ " has been updated");
+          db.close();
+        });
     });
 }

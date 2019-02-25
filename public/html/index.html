@@ -40,15 +40,15 @@
   </head>
       <center>
           <h1>Gastos diarios </h1>
-          <form action="/nuevo-gasto" method="POST">
+          <form action="/gasto/nuevo" method="POST">
             <label for="nombre" class="">Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre aquí">
+            <input type="text" id="nombre" placeholder="Tu nombre aquí" name="nombre">
             <br>
             <label for="monto" class="">Monto</label>
-            <input type="text" id ="monto">
+            <input type="text" id ="monto" name="monto">
             <br>
             <label for="categoria" class="">Categoría</label>
-            <select name="" id="categoria">
+            <select name="categoria" id="categoria">
                 <option value="Comida">Comida</option>
                 <option value="Ropa">Ropa</option>
                 <option value="Netflix">Netflix</option>
@@ -56,7 +56,7 @@
             </select>
             <br>
               <label for="descripcion" class="">Descripción</label>
-              <input type="text" id="descripcion">
+              <input type="text" id="descripcion" name="descripcion">
             <br>
             <button type="submit" class="boton">Submit</button>
           </form>
